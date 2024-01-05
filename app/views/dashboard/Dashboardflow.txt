@@ -1,0 +1,15 @@
+Okay here is how I want the flow to work 
+
+--> Load the dashboard
+    - Check the DB for projects and project status
+    - If no projects, show create new project view 
+    - If projects, show list view with projects and status
+
+    - If create new project is clicked, show project view (dashboard has overview, documents, takeoff, estimating, bid)
+    - In overview:  Enter descriptions about project (name, due date, sf, project number, description, etc...)
+    - In documents: Button to upload documents (show in list format?)
+     - In takeoff (Do takeoff, for now, just measurement tool (SF and LF))
+     - In estimating, add up takeoff measurements 
+     - In bid, WIP 
+
+     

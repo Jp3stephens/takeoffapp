@@ -1,8 +1,74 @@
 <div class="container mx-auto p-4">
   <div class="my-8">
     <h1><%= t(".title") %></h1>
+    <div data-controller="tabs"
+     data-tabs-active-tab-class="border-blue-500 text-blue-600"
+     data-tabs-inactive-tab-class="border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700 dark:hover:text-neutral-300">
 
-    <p class="mb-2">This is the homepage for logged in users.</p>
-    <p>You can customize this page in <code>app/views/dashboard/show.html.erb</code></p>
+  <select id="" class="sm:hidden mb-4" data-action="tabs#change"><option value="Overview">Overview</option>
+<option value="Documents">Documents</option>
+<option value="Takeoff">Takeoff</option>
+<option value="Estimate">Estimate</option>
+<option value="Bid">Bid</option>
+</select>
+
+  <div class="hidden sm:block mb-4 border-b border-gray-200">
+    <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+        <a href="#"
+           data-tabs-target="tab"
+           data-action="click->tabs#change:prevent"
+           class="whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium">
+          Overview
+        </a>
+        <a href="#"
+           data-tabs-target="tab"
+           data-action="click->tabs#change:prevent"
+           class="whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium">
+          Documents
+        </a>
+        <a href="#"
+           data-tabs-target="tab"
+           data-action="click->tabs#change:prevent"
+           class="whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium">
+          Takeoff
+        </a>
+        <a href="#"
+           data-tabs-target="tab"
+           data-action="click->tabs#change:prevent"
+           class="whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium">
+          Estimate
+        </a>
+        <a href="#"
+          data-tabs-target="tab"
+          data-action="click->tabs#change:prevent"
+          class="whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium">
+          Bid
+     </a>
+    </nav>
+  </div>
+
+    <div class="hidden" data-tabs-target="panel">
+      <%= render "overview" %>
+
+    </div>
+    <div class="hidden" data-tabs-target="panel">
+      <%= render "documents" %>
+
+    </div>
+    <div class="hidden" data-tabs-target="panel">
+          Takeoff Panel
+
+    </div>
+    <div class="hidden" data-tabs-target="panel">
+          Estimate Panel
+
+    </div>
+    <div class="hidden" data-tabs-target="panel">
+          Bid Panel
+
+    </div>
+</div>
+    
+
   </div>
 </div>
