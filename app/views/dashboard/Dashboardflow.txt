@@ -12,4 +12,8 @@ Okay here is how I want the flow to work
      - In estimating, add up takeoff measurements 
      - In bid, WIP 
 
-     
+
+
+     - For Takeoff: 
+        - Probably will use Canvas JS 
+            - It's going to be very complicated, and going to suck. But this is a large todo item I should probably start ASAP
