@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Image/PDF Drawing</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
+</head>
+<body>
+  <canvas id="myCanvas" width="800" height="600" style="border:1px solid #000;"></canvas>
+  <input type="file" id="fileInput" accept=".png,.jpg,.jpeg,.pdf"><br><br>
+  <button onclick="clearCanvas()">Clear</button>
+  <button onclick="zoomIn()">Zoom In</button>
+  <button onclick="zoomOut()">Zoom Out</button>
+
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    let img = null;
+    let isDrawing = false;
+    let prevX, prevY;
+    let zoomFactor = 1;
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      img = null;
+    }
+
+    function drawImageOrPDF(file) {
+      clearCanvas();
+
+      if (file.type.includes('image')) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          img = new Image();
+          img.onload = function() {
+            ctx.drawImage(img, 0, 0, canvas.width * zoomFactor, canvas.height * zoomFactor);
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      } else if (file.type === 'application/pdf') {
+        // Load PDF
+        // Implement PDF rendering using a library like PDF.js
+        // For brevity, the PDF rendering code is not included here
+      }
+    }
+
+    function resizeCanvas() {
+      if (img) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width * zoomFactor, canvas.height * zoomFactor);
+        // You may need to adjust this based on how your drawing is stored/scaled
+        // For example, scale the drawing coordinates using zoomFactor
+      }
+    }
+
+    function zoomIn() {
+      zoomFactor *= 1.2; // Adjust the zoom increment as needed
+      resizeCanvas();
+    }
+
+    function zoomOut() {
+      zoomFactor /= 1.2; // Adjust the zoom decrement as needed
+      resizeCanvas();
+    }
+
+    canvas.addEventListener('mousedown', function(e) {
+      isDrawing = true;
+      prevX = e.offsetX;
+      prevY = e.offsetY;
+    });
+
+    canvas.addEventListener('mousemove', function(e) {
+      if (isDrawing) {
+        ctx.beginPath();
+        ctx.moveTo(prevX, prevY);
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+        prevX = e.offsetX;
+        prevY = e.offsetY;
+      }
+    });
+
+    canvas.addEventListener('mouseup', function() {
+      isDrawing = false;
+    });
+
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        drawImageOrPDF(file);
+      }
+    });
+  </script>
+</body>
+</html>
