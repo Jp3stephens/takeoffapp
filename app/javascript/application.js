@@ -7,4 +7,4 @@ require("local-time").start()
 import "./channels"
 import "./controllers"
 import "./src/**/*"
-import "takeoffcanvas.js"
+import "./channels/takeoffcanvas.js"
