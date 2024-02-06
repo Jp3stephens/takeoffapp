@@ -1,5 +1,13 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
+  resources :materials do 
+    resources :calculations, only: [:create]
+    post 'finish', to: 'calculations#finish'
+    root to: 'materials#index'
+  end 
+
+  # root to 'materials#index'
+
   draw :turbo
 
   # Jumpstart views

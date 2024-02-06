@@ -1,0 +1,6 @@
+<div id="<%= dom_id(material, :index) %>">
+  <%= turbo_stream_from material %>
+  <%= render material %>
+  <%= link_to "View", material, class: "btn btn-white" %>
+</div>
+
